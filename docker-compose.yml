@@ -1,0 +1,25 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    ports: 
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: seay0
+      MONGO_INITDB_ROOT_PASSWORD: ocean1220
+
+  fastify: 
+    image: seay0/helloworld-was:1.1
+    restart: always
+    ports: 
+      - '3000:3000'
+    depends_on:
+      - mongo
+    environment:
+      MONGO_USERNAME: seay0
+      MONGO_PASSWORD: ocean1220
+      MONGO_HOSTNAME: mongo
